@@ -1,0 +1,76 @@
+@import url("https://fonts.googleapis.com/css?family=Poppins");
+@import url("https://fonts.googleapis.com/css?family=Questrial");
+
+:root {
+    --bg-color: #fff;
+    --text-color: #222;
+    --blog-gray-color: rgb(80, 80, 80);
+    --background-background: #fff;
+    --selection: #5d93ff;
+    --selection-text: #806000;
+    --poppins: "Poppins", sans-serif;
+    --questrial: "Questrial", sans-serif;
+}
+body {
+    margin: 0%;
+    padding: 0%;
+    width: 100vw;
+    background: var(--bg-color);
+    color: var(--text-color);
+    max-width: 100vw;
+    overflow-x: hidden;
+    align-items: center;
+    font-family: var(--poppins);
+}
+.App {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 98vh;
+    background-color: white;
+}
+.game {
+    display: flex;
+    flex-direction: column;
+    gap: 4px
+}
+.line {
+    display: flex;
+    gap: 4px;
+    justify-content: center;
+    align-items: center;
+}
+.tile {
+    width: 70px;
+    height: 70px;
+    border: solid aqua;
+    background-color: aqua;
+}
+.links {
+    font-style: normal;
+    text-decoration: none;
+    color: var(--text-color);
+}
+.footer {
+    margin-top: 40px;
+}
+::selection {
+    color: var(--bg-color);
+    background: var(--text-color);
+}
+@media (max-width: 800px) {
+    .game {
+        gap: 2px
+    }
+    .line {
+        gap: 2px;
+    }
+    .tile {
+        width: 40px;
+        height: 40px;
+    }
+    .footer {
+        margin-top: 20px;
+    }
+}
