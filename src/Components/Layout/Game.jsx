@@ -1,34 +1,36 @@
 import React, { useEffect, useState } from 'react'
+import { useWord } from '../../Hooks/useWord';
 import Footer from './Footer';
 
-const API_URL = 'https://api.frontendexpert.io/api/fe/wordle-words';
 const LENGTH = 5;
+const API_URL = 'https://random-word-api.herokuapp.com/all';
 
 function Game() {
 
-  const [solution, setSolution] = useState('Not working');
+  // the work which is correct
+  const [solution, setSolution] = useWord(API_URL);
+  console.log("Solution: " + solution);
+  // array of strings with length 6
   const [guesses, setGuesses] = useState(Array(6).fill(null));
+  const [currnetGuess, setCurrentGuess] = useState('');
 
-  useEffect(()=>{
-    const fetchWord = async () => {
-      const response = await fetch(API_URL);
-      const words = await response.json();
-      const randomWord = words[Math.floor(Math.random() * words.length)];
-      setSolution(randomWord);
-      console.log("Random Word: "+ randomWord + "Solution: " + solution);
-    }
-    fetchWord();
-    setSolution("MATCH");
+  useEffect(()=> {
+    const handleKeydown = (event) => {
+      setCurrentGuess(oldGuess => oldGuess + event.key);
+    };
+    window.addEventListener('keydown', handleKeydown);
 
-  }, []);
-
+    return () => window.removeEventListener('keydown', handleKeydown);
+  },[]);
 
 
   return (
     <div className='game'>
-      {guesses.map(guess => {
+      {guesses.map((guess, i) => {
+        const isCurrentGuess = i === guesses.findIndex(val => val == null);
         return(
-          <Line guess={guess ?? ''} />
+          <Line guess={isCurrentGuess ? currnetGuess : guess ?? ''} />
+
         )
       })}
     </div>
