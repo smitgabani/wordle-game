@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { useWord } from '../../Hooks/useWord';
-import Footer from './Footer';
 
 const LENGTH = 5;
 const API_URL = 'https://random-word-api.herokuapp.com/all';
@@ -8,8 +7,9 @@ const API_URL = 'https://random-word-api.herokuapp.com/all';
 function Game() {
 
   // the work which is correct
+  // do not use setSolution in this application.
   const [solution, setSolution] = useWord(API_URL);
-  console.log("Solution: " + solution);
+
   // array of strings with length 6
   const [guesses, setGuesses] = useState(Array(6).fill(null));
   const [currnetGuess, setCurrentGuess] = useState('');
@@ -33,6 +33,7 @@ function Game() {
 
         )
       })}
+
     </div>
   )
 }

@@ -13,4 +13,3 @@ Wordle game is a word guessing game with a simple 6x5 grid interface that has ta
 - useEffects cleanup function
 - useEffect adding and removing function on events (callbacks - eventlisteners)
 - api call in useEffect to create custom hook
-
