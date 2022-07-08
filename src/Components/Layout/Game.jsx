@@ -9,6 +9,7 @@ function Game() {
   // the work which is correct
   // do not use setSolution in this application.
   const [solution, setSolution] = useWord(API_URL);
+  const [isGameOver, setIsGameOver] = useState(false);
 
   // array of strings with length 6
   const [guesses, setGuesses] = useState(Array(6).fill(null));
@@ -16,12 +17,36 @@ function Game() {
 
   useEffect(()=> {
     const handleKeydown = (event) => {
-      setCurrentGuess(oldGuess => oldGuess + event.key);
+      if (isGameOver) {
+        return;
+      }
+
+      if( /^[A-Za-z]$/.test(event.key) ) {
+        setCurrentGuess(oldGuess => oldGuess + event.key);
+      }
+
+      if (event.key === 'Enter' ) {
+        if (currnetGuess.length !== 5 ) {
+          return;
+        }
+        const isCorrect  = solution === currnetGuess;
+        if (isCorrect) {
+          setIsGameOver(true);
+        }
+      }
+      if (event.key === "Backspace") {
+        setCurrentGuess(currnetGuess=> currnetGuess.slice(0,-1));
+      }
+      if (currnetGuess.length>= 5) {
+
+      }
+
+
     };
     window.addEventListener('keydown', handleKeydown);
 
     return () => window.removeEventListener('keydown', handleKeydown);
-  },[]);
+  },[currnetGuess]);
 
 
   return (

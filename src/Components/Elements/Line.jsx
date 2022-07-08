@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function Tiles() {
+export default function Line() {
   return (
     <div>
 
