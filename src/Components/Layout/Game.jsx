@@ -33,11 +33,13 @@ function Game() {
         if (isCorrect) {
           setIsGameOver(true);
         }
+        const newGuesses = [...guesses];
       }
       if (event.key === "Backspace") {
         setCurrentGuess(currnetGuess=> currnetGuess.slice(0,-1));
       }
       if (currnetGuess.length>= 5) {
+        return;
 
       }
 
@@ -46,7 +48,7 @@ function Game() {
     window.addEventListener('keydown', handleKeydown);
 
     return () => window.removeEventListener('keydown', handleKeydown);
-  },[currnetGuess]);
+  },[currnetGuess, isGameOver, solution]);
 
 
   return (
@@ -54,7 +56,9 @@ function Game() {
       {guesses.map((guess, i) => {
         const isCurrentGuess = i === guesses.findIndex(val => val == null);
         return(
-          <Line guess={isCurrentGuess ? currnetGuess : guess ?? ''} />
+          <Line
+          guess={isCurrentGuess ? currnetGuess : guess ?? ''}
+          isLast={!isCurrentGuess && guess != null} />
 
         )
       })}
@@ -63,10 +67,13 @@ function Game() {
   )
 }
 
-function Line({ guess }) {
+function Line({ guess, isLast }) {
   const tiles = [];
+  let classname = "tile";
+
 
   for (let i = 0; i < LENGTH; i++) {
+
     const char = guess[i];
     tiles.push(<div key={i} className='tile'>{char}</div>)
   }
