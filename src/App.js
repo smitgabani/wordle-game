@@ -5,7 +5,7 @@ import Keyboard from "./Components/Layout/Keyboard";
 function App() {
   return (
     <div className="App">
-      <div className="navbar"><h1>Wordle Game by sg</h1></div>
+      <div className="navbar"><h1>Wordle Game</h1></div>
       <Game/>
       <Footer/>
     </div>
